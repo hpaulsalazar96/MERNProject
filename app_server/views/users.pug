@@ -3,3 +3,22 @@ extends layout
 block content
   h1= title
   p Welcome to #{title}
+  hr
+  h4 Listado de usuarios 
+  hr
+  - let pos=0
+  each usuario in usuarios
+    - pos++
+    p
+      b No.:
+      | #{pos}
+    p
+      b Nombre
+      |  #{usuario.nombre}
+    p
+      b Apellido
+      |  #{usuario.apellido}
+    p
+      b Direccion
+      |  #{usuario.direccion}
+  hr
