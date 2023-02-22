@@ -40,15 +40,19 @@ const dbURI = 'mongodb://localhost:27017/db_project_dw3';
 mongoose.set('strictQuery', true)
 
 // Connect MongoDB at default port 27017.
-mongoose.connect(dbURI, {
+const logDB = mongoose.createConnection(dbURI, {
     serverSelectionTimeoutMS: 5000,
     family: 4,
-}).catch(err => console.log('Mongoose Error: ',err.reason));
+});
 
-mongoose.connection.on('connected',()=>{
+logDB.on('connected',()=>{
     console.log(`Mongoose se conecto a: ${dbURI}`);
 });
 
-mongoose.connection.on('disconnected',()=>{
+logDB.on('disconnected',()=>{
     console.log(`Mongoose se desconecto de: ${dbURI}`);
+});
+
+logDB.on('error',()=>{
+    console.log(`Mongoose log error a: ${dbURI}`);
 });
