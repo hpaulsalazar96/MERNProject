@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const readLine = require('readline');
 
+require('./esquema_usuarios')
+
 if(process.platform === 'win32'){
     const rl = readLine.Interface({
         input: process.stdin,
@@ -40,19 +42,19 @@ const dbURI = 'mongodb://localhost:27017/db_project_dw3';
 mongoose.set('strictQuery', true)
 
 // Connect MongoDB at default port 27017.
-const logDB = mongoose.createConnection(dbURI, {
+mongoose.connect(dbURI, {
     serverSelectionTimeoutMS: 5000,
     family: 4,
-});
+}).catch(err => console.log('Mongoose Error: ',err.reason));
 
-logDB.on('connected',()=>{
+mongoose.connection.on('connected',()=>{
     console.log(`Mongoose se conecto a: ${dbURI}`);
 });
 
-logDB.on('disconnected',()=>{
+mongoose.connection.on('disconnected',()=>{
     console.log(`Mongoose se desconecto de: ${dbURI}`);
 });
 
-logDB.on('error',()=>{
+mongoose.connection.on('error',()=>{ 
     console.log(`Mongoose log error a: ${dbURI}`);
 });
