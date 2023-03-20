@@ -6,7 +6,7 @@ const apiOptions = {
   server: 'http://localhost:3010' // server local
 };
 if (process.env.NODE_ENV === 'production') {
-  apiOptions.server = 'https://hsalazar-dw3.herokuapp.com' // server remoto - produccion
+  apiOptions.server = 'https://hsalazar-dw3.herokuapp.com/' // server remoto - produccion
 };
 
 // arreglo de datos
