@@ -6,7 +6,7 @@ const apiOptions = {
   server: 'http://localhost:3010' // server local
 };
 if (process.env.NODE_ENV === 'production') {
-  apiOptions.server = 'https://hsalazar-dw3.herokuapp.com/' // server remoto - produccion
+  apiOptions.server = 'https://hsalazar-dw3.herokuapp.com' // server remoto - produccion
 };
 
 const renderIndex = (req, res, responseBody) => {
@@ -42,3 +42,14 @@ const index = (req, res, next) => {
 module.exports = {
     index
 };
+
+
+/*//controllers
+
+const index = (req, res, next) => {
+    res.render('index', { title: 'Mi Express' });
+  }
+
+module.exports = {
+    index
+};*/
