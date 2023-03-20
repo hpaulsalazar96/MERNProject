@@ -19,7 +19,7 @@ const procShutdown = (msg, callback) =>{
         callback()
     });
 }
-
+ 
 process.on('SIGUSR2', ()=>{
     procShutdown('terminado por heroku', () =>{
         process.kill(process.pid, 'SIGUSR2');
