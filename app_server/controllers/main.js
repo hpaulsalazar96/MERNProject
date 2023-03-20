@@ -3,10 +3,10 @@ const request = require('request');
 
 // Definir las URLs para los ambientes de desarrollo y produccion
 const apiOptions = {
-  server: 'http://localhost:3010/' // server local
+  server: 'http://localhost:3010' // server local
 };
 if (process.env.NODE_ENV === 'production') {
-  apiOptions.server = 'https://hsalazar-dw3.herokuapp.com/' // server remoto - produccion
+  apiOptions.server = 'https://hsalazar-dw3.herokuapp.com' // server remoto - produccion
 };
 
 const renderIndex = (req, res, responseBody) => {
@@ -15,7 +15,7 @@ const renderIndex = (req, res, responseBody) => {
 
 // peticion HTTP - GET /api/users
 const index = (req, res, next) => {
-      const path = 'api/users/';
+      const path = '/api/users/';
       const requestOptions = { // objeto cargado con las opciones para request
         url: `${apiOptions.server}${path}`,
         method: 'GET',
