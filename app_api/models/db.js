@@ -52,7 +52,7 @@ mongoose.connect(dbURI, {
 }).catch(err => console.log('Mongoose Error: ',err.reason));
 
 mongoose.connection.on('connected',()=>{
-    console.log(`Mongoose se conecto a: ${dbURI}`);
+    console.log(`Mongoose se conecto a: ${dbURI}`); 
 });
 
 mongoose.connection.on('disconnected',()=>{
