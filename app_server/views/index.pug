@@ -1,5 +1,99 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  // Inicia el contenido de la página
+  header
+      // Fixed navbar
+      nav.navbar.navbar-expand-md.fixed-top.bg-dark.navbar-dark.text-white
+        .container-fluid
+          a.navbar-brand(href='/') Proyecto MERN
+          button.navbar-toggler(type='button' data-bs-toggle='collapse' data-bs-target='#navbarCollapse' aria-controls='navbarCollapse' aria-expanded='false' aria-label='Toggle navigation')
+            span.navbar-toggler-icon
+          #navbarCollapse.collapse.navbar-collapse
+            // Nueva versión de las opciones OJO: me-auto mb-2 mb-md-0  en la lista ul
+            ul.nav.col-12.col-lg-auto.my-2.justify-content-center.my-md-0.text-small
+              li
+                a.nav-link.active(href='/')
+                  svg.bi.d-block.mx-auto.mb-1(width='24' height='24')
+                    use(xlink:href='#home')
+                  |  Home
+              li.nav-item.dropdown
+                a#usuarios.nav-link.text-white.dropdown-toggle(href='#' data-bs-toggle='dropdown' aria-expanded='false')
+                  svg.bi.d-block.mx-auto.mb-1(width='24' height='24')
+                    use(xlink:href='#people-circle')
+                  |  Users
+                ul.dropdown-menu(aria-labelledby='usuarios')
+                  li
+                    a.dropdown-item(href='/users/add') Create
+                  li
+                    a.dropdown-item(href='#') Read One
+                  li
+                    a.dropdown-item(href='/users') Read All
+                  li
+                    a.dropdown-item(href='#') Update
+                  li
+                    a.dropdown-item(href='#') Delete
+              li
+                a.nav-link.text-white(href='/about')
+                  svg.bi.d-block.mx-auto.mb-1(width='24' height='24')
+                    use(xlink:href='#grid')
+                  |  About
+
+  main.flex-shrink-0
+    .container
+      h1.mt-5 Mi primer Proyecto MERN v1
+      hr(style="background-color: black;")
+      h1.text-center Listado de usuarios
+      table.table.table-hover.table-dark.table-responsive.bg-secondary.table-striped
+        caption
+        thead.thead-dark.fixed
+          tr
+            th(scope="col") #
+            th(scope="col") Nombre
+            th(scope="col") Apellido
+            th(scope="col") Dirección
+            th(scope="col") Carrera
+            th(scope="col") Operaciones
+        tbody
+          - var pos=1
+          each usuario in objetoUsuario
+            tr
+              td.numUsuario=pos++
+              td #{usuario.nombre}
+              td #{usuario.apellido}
+              td #{usuario.direccion}
+              td #{usuario.carrera}
+              td
+                button.btn.btn-outline-light.space.text-warning(type="button", href="#update", data-toggle="modal")
+                  em.fas.fa-edit
+                button.btn.btn-outline-light.space.text-danger(type="button", href="#delete", data-toggle="modal")
+                  em.far.fa-trash-alt
+          //- tr
+          //-   td 2
+          //-   td Clark
+          //-   td Kent
+          //-   td Wisconsin - USA
+          //-   td Periodismo
+          //-   td
+          //-     button.btn.btn-outline-light.space.text-warning(type="button", href="#update", data-toggle="modal")
+          //-       em.fas.fa-edit
+          //-     button.btn.btn-outline-light.space.text-danger(type="button", href="#delete", data-toggle="modal")
+          //-       em.far.fa-trash-alt
+          //- tr
+          //-   td 3
+          //-   td Tony
+          //-   td Stark
+          //-   td Quito - Ecuador
+          //-   td Diseño MI
+          //-   td
+          //-     button.btn.btn-outline-light.space.text-warning(type="button", href="#update", data-toggle="modal")
+          //-       em.fas.fa-edit
+          //-     button.btn.btn-outline-light.space.text-danger(type="button", href="#delete", data-toggle="modal")
+          //-       em.far.fa-trash-alt
+      hr(style="background-color: black;")
+
+  // Inicia el contenido del footer
+  footer.footer.mt-auto.py-3.bg-light.fixed-bottom
+    .container
+      span.text-muted Welcome to #{title}
+

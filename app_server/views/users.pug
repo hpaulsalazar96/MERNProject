@@ -1,24 +1,88 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
-  hr
-  h4 Listado de usuarios 
-  hr
-  - let pos=0
-  each usuario in usuarios
-    - pos++
-    p
-      b No.:
-      | #{pos}
-    p
-      b Nombre
-      |  #{usuario.nombre}
-    p
-      b Apellido
-      |  #{usuario.apellido}
-    p
-      b Direccion
-      |  #{usuario.direccion}
-  hr
+  // Inicia el contenido de la página
+  header
+      // Fixed navbar
+      nav.navbar.navbar-expand-md.fixed-top.bg-dark.navbar-dark.text-white
+        .container-fluid
+          a.navbar-brand(href='/') Proyecto MERN
+          button.navbar-toggler(type='button' data-bs-toggle='collapse' data-bs-target='#navbarCollapse' aria-controls='navbarCollapse' aria-expanded='false' aria-label='Toggle navigation')
+            span.navbar-toggler-icon
+          #navbarCollapse.collapse.navbar-collapse
+            // Nueva versión de las opciones OJO: me-auto mb-2 mb-md-0  en la lista ul
+            ul.nav.col-12.col-lg-auto.my-2.justify-content-center.my-md-0.text-small
+              li
+                a.nav-link.text-white(href='/')
+                  svg.bi.d-block.mx-auto.mb-1(width='24' height='24')
+                    use(xlink:href='#home')
+                  |  Home
+              li.nav-item.dropdown
+                a#usuarios.nav-link.dropdown-toggl.activee(href='#' data-bs-toggle='dropdown' aria-expanded='false')
+                  svg.bi.d-block.mx-auto.mb-1(width='24' height='24')
+                    use(xlink:href='#people-circle')
+                  |  Users
+                ul.dropdown-menu(aria-labelledby='usuarios')
+                  li
+                    a.dropdown-item(href='/users/add') Create
+                  li
+                    a.dropdown-item(href='#') Read One
+                  li
+                    a.dropdown-item(href='/users') Read All
+                  li
+                    a.dropdown-item(href='#') Update
+                  li
+                    a.dropdown-item(href='#') Delete
+              li
+                a.nav-link.text-white(href='/about')
+                  svg.bi.d-block.mx-auto.mb-1(width='24' height='24')
+                    use(xlink:href='#grid')
+                  |  About
+
+  main.flex-shrink-0
+    .container
+      h1.mt-5 Mi primer Proyecto MERN v1
+      hr(style="background-color: black;")
+      h1.text-center Listado de usuarios
+
+      h1= title
+      p Welcome to #{title}
+      hr
+      h4 Listado de usuarios 
+      hr
+      - let pos=0
+      each usuario in users
+        - pos++
+        p 
+          b No.: 
+          | #{pos}
+        p 
+          b Nombre : 
+          | #{usuario.nombre}
+        p 
+          b Apellido :
+          | #{usuario.apellido}
+        p 
+          b Dirección: 
+          | #{usuario.direccion} 
+        p 
+          b Carrera: 
+          | #{usuario.carrera}       
+        hr
+      //- p 
+      //-   b Nombre: 
+      //-   | #{nombre}
+      //- p 
+      //-   b Apellido: 
+      //-   | #{apellido}
+      //- p 
+      //-   b Direccion: 
+      //-   | #{direccion}
+      //- p 
+      //-   b Carrera: 
+      //-   | #{carrera}
+
+  // Inicia el contenido del footer
+  footer.footer.mt-auto.py-3.bg-light.fixed-bottom
+    .container
+      span.text-muted Welcome to #{title}

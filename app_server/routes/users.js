@@ -1,19 +1,28 @@
 const express = require('express');
 const router = express.Router();
 
-//controllers imports
-const ctrlUsers = require('../controllers/users')
+// incorporar controllers
+const ctrlUsers = require('../controllers/users');
 
-/* GET users page. */
-router.get('/', ctrlUsers.index);
+/* GET users listing. */
+router.get('/', ctrlUsers.users);
 
-router.get('/create', ctrlUsers.userCreate);
+/* Creación de usuarios - render de la vista users_add */
+router.get('/add', ctrlUsers.addUsers);
 
-router.get('/read', ctrlUsers.userRead);
+/* Creación de usuarios - petición HTT POST /users */
+router.post('/add', ctrlUsers.doAddUsers);
 
-router.get('/update', ctrlUsers.userUpdate);
+/* GET users create. */
+router.get('/create', ctrlUsers.usersCreate);
 
-router.get('/delete', ctrlUsers.userDelete);
+/* GET users read. */
+router.get('/read', ctrlUsers.usersRead);
 
+/* GET users update. */
+router.get('/update', ctrlUsers.usersUpdate);
+
+/* GET users delete. */
+router.get('/delete', ctrlUsers.usersDelete);
 
 module.exports = router;
