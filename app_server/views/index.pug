@@ -18,7 +18,7 @@ block content
                     use(xlink:href='#home')
                   |  Home
               li.nav-item.dropdown
-                a#usuarios.nav-link.text-white.dropdown-toggle(href='#' data-bs-toggle='dropdown' aria-expanded='false')
+                a#usuarios.nav-link.dropdown-toggle.active(href='#' data-bs-toggle='dropdown' aria-expanded='false')
                   svg.bi.d-block.mx-auto.mb-1(width='24' height='24')
                     use(xlink:href='#people-circle')
                   |  Users
@@ -28,11 +28,11 @@ block content
                   li
                     a.dropdown-item(href='#') Read One
                   li
-                    a.dropdown-item(href='/users') Read All
+                    a.dropdown-item(href='/users/list') Read All
                   li
-                    a.dropdown-item(href='#') Update
+                    a.dropdown-item(href='/users/update') Update
                   li
-                    a.dropdown-item(href='#') Delete
+                    a.dropdown-item(href='/users/delete') Delete
               li
                 a.nav-link.text-white(href='/about')
                   svg.bi.d-block.mx-auto.mb-1(width='24' height='24')
@@ -53,6 +53,7 @@ block content
             th(scope="col") Apellido
             th(scope="col") Dirección
             th(scope="col") Carrera
+            //th(scope='col') Documento
             th(scope="col") Operaciones
         tbody
           - var pos=1
@@ -63,10 +64,11 @@ block content
               td #{usuario.apellido}
               td #{usuario.direccion}
               td #{usuario.carrera}
+              td.documento(style='display:none;')= usuario._id 
               td
-                button.btn.btn-outline-light.space.text-warning(type="button", href="#update", data-toggle="modal")
+                a.btn.btn-outline-light.space.text-warning(role='button' href='/users/update/'+usuario._id )
                   em.fas.fa-edit
-                button.btn.btn-outline-light.space.text-danger(type="button", href="#delete", data-toggle="modal")
+                a.btn.btn-outline-light.space.text-danger(role='button' href='/users/delete/'+usuario._id )
                   em.far.fa-trash-alt
           //- tr
           //-   td 2

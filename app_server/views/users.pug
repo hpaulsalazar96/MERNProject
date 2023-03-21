@@ -18,7 +18,7 @@ block content
                     use(xlink:href='#home')
                   |  Home
               li.nav-item.dropdown
-                a#usuarios.nav-link.dropdown-toggl.activee(href='#' data-bs-toggle='dropdown' aria-expanded='false')
+                a#usuarios.nav-link.dropdown-toggle.active(href='#' data-bs-toggle='dropdown' aria-expanded='false')
                   svg.bi.d-block.mx-auto.mb-1(width='24' height='24')
                     use(xlink:href='#people-circle')
                   |  Users
@@ -26,13 +26,13 @@ block content
                   li
                     a.dropdown-item(href='/users/add') Create
                   li
-                    a.dropdown-item(href='#') Read One
+                    a.dropdown-item(href='/users/search') Read One
                   li
                     a.dropdown-item(href='/users') Read All
                   li
-                    a.dropdown-item(href='#') Update
+                    a.dropdown-item(href='/users/update') Update
                   li
-                    a.dropdown-item(href='#') Delete
+                    a.dropdown-item(href='/users/delete') Delete
               li
                 a.nav-link.text-white(href='/about')
                   svg.bi.d-block.mx-auto.mb-1(width='24' height='24')

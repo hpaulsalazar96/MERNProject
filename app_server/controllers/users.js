@@ -10,7 +10,7 @@ if (process.env.NODE_ENV === 'production') {
 };
 
 // arreglo de datos
-let usuarios = [
+/*let usuarios = [
   {
     nombre: 'Tomás',
     apellido: 'Dávila',
@@ -56,7 +56,7 @@ let usuarios = [
     apellido: 'Vásconez',
     direccion: 'Quito - Ecuador'
   }
-]
+]*/
 
 // Listado de usuarios
 // 1. renderizar la vista users
@@ -149,21 +149,178 @@ let usuarios = [
 
   }
 
-  const usersCreate = (req, res, next) => {
+  const createUsers = (req, res, next) => {
     res.send('Respuesta a la ruta /users/create');
   }
 
-  const usersRead = (req, res, next) => {
+  const readUsers = (req, res, next) => {
     res.send('Respuesta a la ruta /users/read');
   }
 
-  const usersUpdate = (req, res, next) => {
-    res.send('Respuesta a la ruta /users/update');
+  const updateUsers = (req, res, next) => {
+    const path = `/api/users/${req.params.userId}`; // invoco a la ruta de la API para buscar por Id;
+    const requestOptions = {
+        url: `${apiOptions.server}${path}`,
+        method: 'GET',
+        json: {}
+    }
+    console.log('Ruta: ', path);
+    request(
+        requestOptions, // Opciones
+        (err, response, body) => { // callback con sus 3 partes
+            console.log('Documento: ', body);
+            console.log('Status Code: ', response.statusCode);
+            if (err) {
+                console.log('Request encontró el error: ', err);
+            } else if (response.statusCode === 200 && body) { // además del status code, el objeto resultante debe tener contenido
+                console.log('Objeto Resultante: ', body);
+                renderUpdateUsers(req, res, body); // llamar a la función que hace render de la vista users_delete
+            } else {
+                console.log('Status Code: ', response.statusCode);
+                res.render('error', {
+                    mensaje: 'Existe un error en la colección usuarios'
+                })
+            }
+        });
   }  
 
-  const usersDelete = (req, res, next) => {
-    res.send('Respuesta a la ruta /users/delete');
+  const deleteUsers = (req, res) => {
+    const path = `/api/users/${req.params.userId}`; // invoco a la ruta de la API para buscar por Id;
+    const requestOptions = {
+        url: `${apiOptions.server}${path}`,
+        method: 'GET',
+        json: {}
+    }
+    console.log('Ruta: ', path);
+    request(
+        requestOptions, // Opciones
+        (err, response, body) => { // callback con sus 3 partes
+            console.log('Documento: ', body);
+            console.log('Status Code: ', response.statusCode);
+            if (err) {
+                console.log('Request encontró el error: ', err);
+            } else if (response.statusCode === 200 && body) { // además del status code, el objeto resultante debe tener contenido
+                console.log('Objeto Resultante: ', body);
+                renderDeleteUsers(req, res, body); // llamar a la función que hace render de la vista users_delete
+            } else {
+                console.log('Status Code: ', response.statusCode);
+                res.render('error', {
+                    mensaje: 'Existe un error en la colección usuarios'
+                })
+            }
+        });
   }
+
+
+  // 2. Eliminar el documento
+  const doDeleteUsers = (req, res) => {
+    const path = `/api/users/${req.params.userId}`; // invoco a la ruta de la API para eliminar por Id;
+    const requestOptions = {
+        url: `${apiOptions.server}${path}`,
+        method: 'DELETE',
+        json: {}
+    }
+    console.log('Ruta: ', path);
+    request(
+        requestOptions, // Opciones
+        (err, response, body) => { // callback con sus 3 partes
+            console.log('Documento: ', body);
+            console.log('Status Code: ', response.statusCode);
+            if (err) {
+                console.log('Request encontró el error: ', err);
+            } else if (response.statusCode === 204) { // delete status code
+                console.log('Objeto Resultante: ', body);
+                return res.redirect('/'); // retorno a la página de inicio
+            } else {
+                console.log('Status Code: ', response.statusCode);
+                res.render('error', {
+                    mensaje: 'Existe un error en la colección usuarios'
+                })
+            }
+        });
+  }
+
+
+// Eliminación de usuarios 
+
+    // 0. Render de la vista users_delete - Mostrar Formulario
+  const renderDeleteUsers = (req, res, responseBody) => {
+    res.render('users_delete', {
+      title: 'Eliminación de usuarios',
+      mensaje: 'Bienvenido a Eliminación de usuarios',
+        nombre: responseBody.nombre,
+        apellido: responseBody.apellido,
+        identificacion: responseBody.identificacion,
+        direccion: responseBody.direccion,
+        telefono: responseBody.telefono,
+        edad: responseBody.edad,
+        tipo: responseBody.tipo,
+        nombres: responseBody.nombres,
+        carrera: responseBody.carrera,
+        fecha: responseBody.creado,
+        documento: responseBody._id // necesario para realizar el delete
+    });
+  }
+
+  // 2. Eliminar el documento
+  const doUpdateUsers = (req, res) => {
+    const path = `/api/users/${req.params.userId}`; // invoco a la ruta de la API para eliminar por Id;
+    const postdata = {
+      nombre: req.body.nombre,
+      apellido: req.body.apellido,
+      identificacion: req.body.identificacion,
+      direccion: req.body.direccion,
+      telefono: req.body.telefono,
+      edad: req.body.edad,
+      tipo: req.body.tipo,
+      nombres: req.body.nombres,
+      carrera: req.body.carrera,
+      fecha: req.body.fecha
+    }
+    const requestOptions = {
+        url: `${apiOptions.server}${path}`,
+        method: 'PUT',
+        json: postdata
+    }
+    console.log('Ruta: ', path);
+    request(requestOptions, 
+      (err, response, body)=>{
+        console.log('Opciones: ', requestOptions);
+        if (response.statusCode === 200) { // creación exitosa
+          console.log('Body: ', body);
+          // volver a mostrar la vista users_add para el ingreso de más documentos
+          res.render('users_add', {
+            titulo: 'Creación de Usuarios',
+            mensaje: 'Usuario creado exitosamente'
+          });
+        } else {
+          console.log('statuscode: ', response.statusCode);
+          console.log('error: ', err);
+          console.log('req.body: ', req.body);
+          console.log('Opciones: ', requestOptions);
+          res.render('error', { message: 'Existe un error en la creación de usuarios' });
+        }
+      });
+  }
+
+    // 0. Render de la vista users_update - Mostrar Formulario
+    const renderUpdateUsers = (req, res, responseBody) => {
+      res.render('users_update', {
+        title: 'Actualizacion de usuarios',
+        mensaje: 'Bienvenido a Actualizacion de usuarios',
+          nombre: responseBody.nombre,
+          apellido: responseBody.apellido,
+          identificacion: responseBody.identificacion,
+          direccion: responseBody.direccion,
+          telefono: responseBody.telefono,
+          edad: responseBody.edad,
+          tipo: responseBody.tipo,
+          nombres: responseBody.nombres,
+          carrera: responseBody.carrera,
+          fecha: responseBody.creado,
+          documento: responseBody._id // necesario para realizar el update
+      });
+    }
 
   module.exports = {
     // Listar usuarios
@@ -171,8 +328,12 @@ let usuarios = [
     // Creación de usuarios
     addUsers,   // 1. renderizar la vista users_add
     doAddUsers, // 2. petición HTTP - POST /api/users
-    usersCreate,
-    usersRead,
-    usersUpdate,
-    usersDelete
+    createUsers,
+    readUsers,
+    updateUsers,
+    doUpdateUsers,
+    //renderUpdateUsers,
+    deleteUsers,
+    doDeleteUsers,
+    //renderDeleteUsers
   }

@@ -15,5 +15,9 @@ router
     .put(ctrlUsers.userUpdate)
     .delete(ctrlUsers.userDelete);
 
+router
+    .route('/search/:name')
+    .get(ctrlUsers.userFindName); // Búsqueda por nombre
+
 module.exports = router;
 
