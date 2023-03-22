@@ -26,8 +26,28 @@ router
         .route('/search/:userId')      
         .get(ctrlUsers.userFindName);
 
-/* GET users update. */
-router.get('/update', ctrlUsers.addUsers);
+/* GET users update search. */
+router
+        .route('/supdate')        
+        .get(ctrlUsers.readUsersUpdate)
+        .post(ctrlUsers.callSearchUpdate);
+
+router
+        .route('/supdate/:userId')
+        .get(ctrlUsers.userFindNameUpdate)
+        .post(ctrlUsers.doSearchedUpdateUsers);
+
+
+/* GET users delete search. */
+router
+        .route('/sdelete')        
+        .get(ctrlUsers.readUsersDelete)
+        .post(ctrlUsers.callSearchDelete);
+
+router
+        .route('/sdelete/:userId')      
+        .get(ctrlUsers.userFindNameDelete)
+        .post(ctrlUsers.doSearchedDeleteUsers);
 
 /* GET users listing. */
 router.get('/list', ctrlUsers.users);

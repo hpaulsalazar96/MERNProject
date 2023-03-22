@@ -19,7 +19,6 @@ block content
                       |  Home
                   li.nav-item.dropdown
                     a#usuarios.nav-link.dropdown-toggle.active(href='/users' data-bs-toggle='dropdown' aria-expanded='false')
-                      //a#usuarios.nav-link.active.dropdown-toggle(href='/users' data-bs-toggle='dropdown' aria-expanded='false')
                       svg.bi.d-block.mx-auto.mb-1(width='24' height='24')
                         use(xlink:href='#people-circle')
                       |   Users
@@ -44,12 +43,22 @@ block content
         .container
             h1.mt-5 #{title}
             hr(style='background-color: black;')
+            form.form-inline.mt-2.mt-md-0(action='/users/sdelete', method='post', role='form')
+                .row.g-3.align-items-center
+                    .col-auto
+                    label.col-form-label(for='textoBuscar') Ingrese el C&oacute;digo/Nombre de usuario a buscar
+                    .col-auto
+                    input.form-control#codigo.mr-sm-2.ml-sm-2(type='text' ,name="codigo" ,placeholder='Código de usuario' ,aria-label='Buscar' )
+                    .col-auto
+                    button.btn.btn-outline-primary(type='submit') Buscar
+                    span#buscarAyuda.form-text.ml-md-2
+                        | Puede ingresar caracteres alfanum&eacute;ricos
             .row.g-3
                 .col-md-2
                 .col-md-8
                   .card
                     .card-body
-                      form.row.g-3(action='', method='post', role='form')
+                      form.row.g-3(action, method='post', role='form')
                         .col-md-6
                           label.form-label(for='nombre') Nombre
                           input#nombre.form-control(type='text' name='nombre' value=nombre placeholder='Ingrese el nombre del usuario' readonly='')
@@ -84,7 +93,7 @@ block content
                         .col-md-6.d-flex.mb-3
                           label.col-md-3.col-form-label(for='materias') Materias
                           select#materias.form-select(name='nombres' multiple='' value=nombres aria-label='multiple select materias' readonly='' disabled)
-                            option(selected='') Seleccione las materias
+                            option(selected) Seleccione las materias
                             option(value='Desarrollo web 1') Desarrollo web 1
                             option(value='Desarrollo web 2') Desarrollo web 2
                             option(value='Desarrollo web 3') Desarrollo web 3
@@ -95,10 +104,10 @@ block content
                             option(value='Periodismo 2') Periodismo 2
                             option(value='Periodismo 3') Periodismo 3
                         .col-md-12.d-flex.mb-3  
-                          //Añadimos el campo 'documento' para no perder el object Id del documento a eliminar           
-                          label.col-md-4.col-form-label(for='documento') Código del Documento a Eliminar
-                          input#documento.form-control(type='text' name='documento' value=documento placeholder='Código del Documento' readonly='')                        
-                        button.btn.btn-outline-primary(type='submit') Eliminar Usuario
+                          //Añadimos el campo 'documento' para no perder el object Id del documento a actualizar           
+                          label.col-md-4.col-form-label(for='documento') Código del Documento a Actualizar
+                          input#documento.form-control(type='text', name='documento' ,value=documento ,placeholder='Código del Documento' ,readonly='')                        
+                        button.btn.btn-outline-danger(type='submit') Eliminar Usuario
             hr(style='background-color: black;')
 
       // Inicia el contenido del footer de la página

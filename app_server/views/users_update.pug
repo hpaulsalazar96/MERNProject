@@ -30,9 +30,9 @@ block content
                       li
                         a.dropdown-item(href='/users/list') Read All
                       li
-                        a.dropdown-item(href='/users/update') Update
+                        a.dropdown-item(href='/users/supdate') Update
                       li
-                        a.dropdown-item(href='/users/delete') Delete
+                        a.dropdown-item(href='/users/sdelete') Delete
                   li
                     a.nav-link.text-white(href='/about')
                       svg.bi.d-block.mx-auto.mb-1(width='24' height='24')
@@ -96,7 +96,7 @@ block content
                         .col-md-12.d-flex.mb-3  
                           //Añadimos el campo 'documento' para no perder el object Id del documento a actualizar           
                           label.col-md-4.col-form-label(for='documento') Código del Documento a Actualizar
-                          input#documento.form-control(type='text' name='documento' value=documento placeholder='Código del Documento')                        
+                          input#documento.form-control(type='text' name='documento' value=documento placeholder='Código del Documento' readonly='')                        
                         button.btn.btn-outline-primary(type='submit') Actualizar Usuario
             hr(style='background-color: black;')
 

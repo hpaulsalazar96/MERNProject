@@ -30,9 +30,9 @@ block content
                       li
                         a.dropdown-item(href='/users/list') Read All
                       li
-                        a.dropdown-item(href='/users/update') Update
+                        a.dropdown-item(href='/users/supdate') Update
                       li
-                        a.dropdown-item(href='/users/delete') Delete
+                        a.dropdown-item(href='/users/sdelete') Delete
                   li
                     a.nav-link.text-white(href='/about')
                       svg.bi.d-block.mx-auto.mb-1(width='24' height='24')
@@ -61,38 +61,38 @@ block content
                       form.row.g-3(action, method='post', role='form')
                         .col-md-6
                           label.form-label(for='nombre') Nombre
-                          input#nombre.form-control(type='text' name='nombre' value=nombre placeholder='Ingrese el nombre del usuario')
+                          input#nombre.form-control(type='text' name='nombre' value=nombre placeholder='Ingrese el nombre del usuario' readonly='')
                         .col-md-6
                           label.form-label(for='apellido') Apellido
-                          input#apellido.form-control(type='text' name='apellido' value=apellido placeholder='Ingrese el apellido del usuario')
+                          input#apellido.form-control(type='text' name='apellido' value=apellido placeholder='Ingrese el apellido del usuario' readonly='')
                         .col-12
                           label.form-label(for='direccion') Dirección
-                          input#direccion.form-control(type='text' name='direccion' value=direccion placeholder='Ingrese la dirección del usuario')
+                          input#direccion.form-control(type='text' name='direccion' value=direccion placeholder='Ingrese la dirección del usuario' readonly='')
                         .col-md-4
                           label.form-label(for='identificacion') Identificación
-                          input#identificacion.form-control(type='number' name='identificacion' value=identificacion placeholder='Ingrese la identificación del usuario')
+                          input#identificacion.form-control(type='number' name='identificacion' value=identificacion placeholder='Ingrese la identificación del usuario' readonly='')
                         .col-md-4
                           label.form-label(for='edad') Edad
-                          input#edad.form-control(type='number' name='edad' value=edad placeholder='Ingrese la edad del usuario')
+                          input#edad.form-control(type='number' name='edad' value=edad placeholder='Ingrese la edad del usuario' readonly='')
                         .col-md-4
                           label.form-label(for='telefono') Teléfono
-                          input#telefono.form-control(type='number' name='telefono' value=telefono placeholder='Ingrese el teléfono del usuario')
+                          input#telefono.form-control(type='number' name='telefono' value=telefono placeholder='Ingrese el teléfono del usuario' readonly='')
                         .col-md-6
                           .col-md-12.mb-3
                             label.form-label(for='tipo') Tipo de Materia
-                            select#tipo.form-select(name='tipo' value=tipo)
+                            select#tipo.form-select(name='tipo' value=tipo readonly='' disabled)
                               option(selected='') Seleccione el tipo de materia
                               option(value='Presencial') Presencial
                               option(value='Virtual') Virtual
                           .col-md-12.mb-3
                             label.form-label(for='carrera') Carrera
-                            input#carrera.form-control(type='text' name='carrera' value=carrera placeholder='Ingrese el nombre de la carrera')
+                            input#carrera.form-control(type='text' name='carrera' value=carrera placeholder='Ingrese el nombre de la carrera' readonly='')
                           .col-md-12.mb-3
                             label.form-label(for='fecha') Fecha de Creación
-                            input#fecha.form-control(type='date' name='creado' value=creado placeholder='Fecha Actual')
+                            input#fecha.form-control(type='date' name='creado' value=creado placeholder='Fecha Actual' readonly='')
                         .col-md-6.d-flex.mb-3
                           label.col-md-3.col-form-label(for='materias') Materias
-                          select#materias.form-select(name='nombres' multiple='' value=nombres aria-label='multiple select materias')
+                          select#materias.form-select(name='nombres' multiple='' value=nombres aria-label='multiple select materias' readonly='' disabled)
                             option(selected) Seleccione las materias
                             option(value='Desarrollo web 1') Desarrollo web 1
                             option(value='Desarrollo web 2') Desarrollo web 2
@@ -106,7 +106,7 @@ block content
                         .col-md-12.d-flex.mb-3  
                           //Añadimos el campo 'documento' para no perder el object Id del documento a actualizar           
                           label.col-md-4.col-form-label(for='documento') Código del Documento a Actualizar
-                          input#documento.form-control(type='text' name='documento' value=documento placeholder='Código del Documento')                        
+                          input#documento.form-control(type='text' name='documento' value=documento placeholder='Código del Documento' readonly='')                        
 
             hr(style='background-color: black;')
 
