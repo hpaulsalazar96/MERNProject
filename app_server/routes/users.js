@@ -17,7 +17,14 @@ router.post('/add', ctrlUsers.doAddUsers);
 router.get('/create', ctrlUsers.createUsers);
 
 /* GET users read. */
-router.get('/search', ctrlUsers.readUsers);
+router
+        .route('/search')        
+        .get(ctrlUsers.readUsers)
+        .post(ctrlUsers.callSearch);
+
+router
+        .route('/search/:userId')      
+        .get(ctrlUsers.userFindName);
 
 /* GET users update. */
 router.get('/update', ctrlUsers.addUsers);
@@ -25,7 +32,7 @@ router.get('/update', ctrlUsers.addUsers);
 /* GET users listing. */
 router.get('/list', ctrlUsers.users);
 
-/* GET users delete. */
+/* GET users update. */
 router
        .route('/update/:userId')
        .get(ctrlUsers.updateUsers)     // 1. Encontrar el documento y mostrarlo en el formulario

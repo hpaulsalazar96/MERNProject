@@ -10,37 +10,37 @@ if (process.env.NODE_ENV === 'production') {
 };
 
 const renderIndex = (req, res, responseBody) => {
-    res.render('index', { title: 'Express MVC en Heroku y git', objetoUsuario: responseBody });
-  }
+  res.render('index', { title: 'Express MVC en Heroku y git', objetoUsuario: responseBody });
+}
 
 // peticion HTTP - GET /api/users
 const index = (req, res, next) => {
-      const path = '/api/users/';
-      const requestOptions = { // objeto cargado con las opciones para request
-        url: `${apiOptions.server}${path}`,
-        method: 'GET',
-        json: {}
-      };
-  
-      request(requestOptions, 
-        (err, response, body)=>{
-          if(err){
-            console.log(err);
-          } else if (response.statusCode === 200){
-            console.log('Objeto resultante: ', body);
-            renderIndex(req, res, body);
-          } else {
-            console.log(response.statusCode);
-            res.render('error', {
-              message: 'Existe un error en la colección usuarios'
-            });
-          }
-      } );
-    }
-  
+  const path = '/api/users/';
+  const requestOptions = { // objeto cargado con las opciones para request
+    url: `${apiOptions.server}${path}`,
+    method: 'GET',
+    json: {}
+  };
+
+  request(requestOptions,
+    (err, response, body) => {
+      if (err) {
+        console.log(err);
+      } else if (response.statusCode === 200) {
+        console.log('Objeto resultante: ', body);
+        renderIndex(req, res, body);
+      } else {
+        console.log(response.statusCode);
+        res.render('error', {
+          message: 'Existe un error en la colección usuarios'
+        });
+      }
+    });
+}
+
 
 module.exports = {
-    index
+  index
 };
 
 

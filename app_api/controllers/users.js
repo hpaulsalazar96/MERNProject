@@ -79,29 +79,31 @@ const userRead = (req, res) => {
 // Búsqueda por nombre/apellido/identificación 
 const userFindName =(req, res)=> {
     const buscar = new RegExp(req.params.name); // permite buscar la ocurrencia de un texto en un campo. Ej.: parte de un nombre
-    console.log ('Buscar usuario con nombre: ', buscar)
+    console.log (`Buscar usuario con nombre: ', ${buscar}`)
     users
         // .find({ 'nombre' : buscar }) // búsqueda por ocurrencia
         .find({ 
-            'identificacion' : req.params.name // permite buscar el valor exacto en un campo. Ej.: el valor de la identificación
+            'nombre' : req.params.name // permite buscar el valor exacto en un campo. Ej.: el valor de la identificación
         }) // obtener todos los documentos de la coleccion que cumplen con el criterio de busqueda
         .exec((err, objetoUsuario)=>{
-            if (!objetoUsuario){ // valido la existencia de documentos en la colección
+            if (!objetoUsuario || objetoUsuario.length == 0) { // find no encontro el documentos en la coleccion
                 console.log(`No existen documentos con nombre ${buscar}`);
                 return res // respondo el mensaje en formato JSON y status HTTP 404
-                    .status(404) 
-                    .json({"Mensaje: ":"Usuario no encontrado con nombre: ", buscar});
-            } else if (err) { // find encontró un error
-                console.log(`Se encontró un error en la colección ${users} con nombre: ${buscar}`);
-                return res  // respondo el error en formato JSON y status HTTP 404
                     .status(404)
-                    .json(err);                
+                    .json({
+                        "Mensaje": "Usuario no encontrado"
+                    });
+            } else if (err) { // find encontro un error
+                console.log(`Se encontro un error en la coleccion ${users} con nombre: ${buscar}`);
+                return res // respondo el error en formato JSON y status HTTP 404
+                    .status(404)
+                    .json(err);
             }
-            console.log("Se encontró el documento con nombre: ", req.params.name);
-            res  // respondo los documentos encontrados en formato JSON y status HTTP 200
+            console.log(`Se encontró el documento con nombre ${req.params.name}`);
+            res // respondo los documentos encontrados en formato JSON y status HTTP 200
                 .status(200)
                 .json(objetoUsuario);
-        })
+        });
 }
 
 //Versión final de Actualizar Usuario con userid
