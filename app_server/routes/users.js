@@ -17,7 +17,7 @@ router.post('/add', ctrlUsers.doAddUsers);
 router.get('/create', ctrlUsers.createUsers);
 
 /* GET users read. */
-router.get('/read', ctrlUsers.readUsers);
+router.get('/search', ctrlUsers.readUsers);
 
 /* GET users update. */
 router.get('/update', ctrlUsers.addUsers);

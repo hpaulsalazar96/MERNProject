@@ -154,7 +154,10 @@ if (process.env.NODE_ENV === 'production') {
   }
 
   const readUsers = (req, res, next) => {
-    res.send('Respuesta a la ruta /users/read');
+    res.render('change_user', {
+      titulo: 'Creación de Usuarios',
+      mensaje: 'Bienvenido a Creación de Usuarios'
+    });
   }
 
   const updateUsers = (req, res, next) => {
